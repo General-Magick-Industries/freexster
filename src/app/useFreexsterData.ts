@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
-import { flushSync } from "react-dom";
+import { useEffect, useMemo, useState, useRef } from "react";
 import type { ChannelRequestInput, FreexsterClient } from "../adapters/freexsterClient";
 import type { FreexsterState, Surface } from "../domain/types";
 
@@ -9,18 +8,20 @@ export function useFreexsterData(client: FreexsterClient) {
   const [status, setStatus] = useState<LoadStatus>("loading");
   const [error, setError] = useState<string | null>(null);
   const [state, setState] = useState<FreexsterState | null>(null);
+  const isMountedRef = useRef(true);
 
   useEffect(() => {
+    isMountedRef.current = true;
     let active = true;
 
     async function load() {
       try {
         const loadedState = await client.loadState();
-        if (!active) return;
+        if (!active || !isMountedRef.current) return;
         setState(loadedState);
         setStatus("ready");
       } catch (caught) {
-        if (!active) return;
+        if (!active || !isMountedRef.current) return;
         setError(caught instanceof Error ? caught.message : "Unable to load Freexster state.");
         setStatus("error");
       }
@@ -29,6 +30,7 @@ export function useFreexsterData(client: FreexsterClient) {
     void load();
 
     return () => {
+      isMountedRef.current = false;
       active = false;
     };
   }, [client]);
@@ -39,17 +41,14 @@ export function useFreexsterData(client: FreexsterClient) {
       error,
       state,
       setActiveSurface(surface: Surface) {
-        flushSync(() => {
-          setState((current) => (current ? { ...current, activeSurface: surface } : current));
-        });
+        setState((current) => (current ? { ...current, activeSurface: surface } : current));
       },
       async submitChannelRequest(input: ChannelRequestInput) {
         const request = await client.submitChannelRequest(input);
-        flushSync(() => {
-          setState((current) =>
-            current ? { ...current, channelRequests: [request, ...current.channelRequests] } : current,
-          );
-        });
+        if (!isMountedRef.current) return request;
+        setState((current) =>
+          current ? { ...current, channelRequests: [request, ...current.channelRequests] } : current,
+        );
         return request;
       },
     }),
