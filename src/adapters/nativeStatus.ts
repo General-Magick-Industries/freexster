@@ -1,7 +1,9 @@
 import type { NativeStatus } from "../domain/types";
 
 export async function loadNativeStatus(): Promise<NativeStatus> {
-  if (!("__TAURI_INTERNALS__" in window)) {
+  const { invoke, isTauri } = await import("@tauri-apps/api/core");
+
+  if (!isTauri()) {
     return {
       runtime: "web",
       simplexRunner: "mock-connected",
@@ -9,6 +11,5 @@ export async function loadNativeStatus(): Promise<NativeStatus> {
     };
   }
 
-  const { invoke } = await import("@tauri-apps/api/core");
   return invoke<NativeStatus>("freexster_status");
 }
