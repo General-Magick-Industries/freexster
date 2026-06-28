@@ -120,3 +120,28 @@ feat: add desktop app shell
 - The new request feedback stays local to the channels surface and does not require widening app state ownership.
 - Duplicate channel submissions are blocked in the UI while the first async request is unresolved.
 - Verification stayed within the requested commands, and both are green after the test-file syntax fix caught during the first run.
+
+## Fix Report
+
+### What changed
+
+- Updated the shared action button style selector in `src/styles.css` to include `.reader-actions button`, so buttons in the `.reader-actions` wrapper receive the same chrome as `.actions button` and `.reader > button` instead of browser defaults.
+
+### Tests run and outputs/results
+
+- `npm test -- src/components/AppShell.test.tsx src/app/FreexsterApp.test.tsx`  
+  - Result: passed (exit code 0).  
+  - Output: `Test Files 2 passed (2)`, `Tests 4 passed (4)`, Duration `1.86s`.
+- `npm run build`  
+  - Result: passed (exit code 0).  
+  - Output: `1590 modules transformed`, `✓ built in 1.52s`.
+
+### Files changed
+
+- `src/styles.css`
+- `.superpowers/sdd/task-5-report.md`
+
+### Self-review notes
+
+- The change is minimal and scoped to shared button styling as requested.
+- No functional behavior changed; only presentation consistency for channel request actions was adjusted.

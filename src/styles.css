@@ -209,6 +209,7 @@ h2 {
 }
 
 .actions button,
+.reader-actions button,
 .reader > button {
   border: 1px solid var(--line);
   background: #ffffff;
