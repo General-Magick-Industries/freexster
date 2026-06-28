@@ -1,0 +1,4 @@
+[[permission]]
+identifier = "allow-freexster-status"
+description = "Allows the Freexster status command."
+commands.allow = ["freexster_status"]
