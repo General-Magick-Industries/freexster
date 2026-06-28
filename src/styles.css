@@ -201,6 +201,13 @@ h2 {
   margin-top: 14px;
 }
 
+.reader-actions {
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+  margin-top: 18px;
+}
+
 .actions button,
 .reader > button {
   border: 1px solid var(--line);
@@ -211,11 +218,32 @@ h2 {
   font-weight: 700;
 }
 
+button:disabled {
+  cursor: progress;
+  opacity: 0.72;
+}
+
 .actions .primary,
 .primary {
   border-color: var(--accent);
   background: var(--accent);
   color: #ffffff;
+}
+
+.status-note {
+  margin: 0;
+  min-height: 20px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.status-note.success {
+  color: #0f5c51;
+}
+
+.status-note.error {
+  color: #8a1f1f;
 }
 
 .proof-state {

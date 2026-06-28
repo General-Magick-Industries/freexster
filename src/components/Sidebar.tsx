@@ -31,6 +31,7 @@ export function Sidebar({
             className={item.surface === activeSurface ? "sidebar-item active" : "sidebar-item"}
             type="button"
             onClick={() => onSurfaceChange(item.surface)}
+            aria-current={item.surface === activeSurface ? "page" : undefined}
           >
             <Icon size={18} />
             <span>{item.label}</span>
