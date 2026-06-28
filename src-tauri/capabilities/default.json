@@ -3,5 +3,5 @@
   "identifier": "default",
   "description": "Default permissions for the Freexster desktop shell.",
   "windows": ["main"],
-  "permissions": ["core:default"]
+  "permissions": ["allow-freexster-status"]
 }
