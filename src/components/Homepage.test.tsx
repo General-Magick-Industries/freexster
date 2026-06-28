@@ -9,5 +9,6 @@ describe("Homepage", () => {
     expect(screen.getByRole("heading", { name: "Freexster" })).toBeInTheDocument();
     expect(screen.getByText("Download the desktop app for private SimpleX-backed inbox features.")).toBeInTheDocument();
     expect(screen.getByText("Read curated public topic channels and verify registry proofs on the web.")).toBeInTheDocument();
+    expect(screen.getByText("The trust registry is designed for ICP canisters, stewardship records, and certified public data.")).toBeInTheDocument();
   });
 });

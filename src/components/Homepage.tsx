@@ -21,7 +21,7 @@ export function Homepage() {
         </article>
         <article>
           <h2>Trust registry</h2>
-          <p>Freexster uses ICP canisters for identity, stewardship, and certified public data.</p>
+          <p>The trust registry is designed for ICP canisters, stewardship records, and certified public data.</p>
         </article>
       </section>
     </main>
