@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, useRef } from "react";
 import type { ChannelRequestInput, FreexsterClient } from "../adapters/freexsterClient";
-import type { FreexsterState, Surface } from "../domain/types";
+import { loadSimplexRunnerStatus } from "../adapters/simplexRunner";
+import type { FreexsterState, NativeStatus, SimplexRunnerStatus, Surface } from "../domain/types";
 
 type LoadStatus = "loading" | "ready" | "error";
 
@@ -16,9 +17,16 @@ export function useFreexsterData(client: FreexsterClient) {
 
     async function load() {
       try {
-        const loadedState = await client.loadState();
+        const [loadedState, simplexRunner] = await Promise.all([client.loadState(), loadSimplexRunnerStatus()]);
         if (!active || !isMountedRef.current) return;
-        setState(loadedState);
+        setState({
+          ...loadedState,
+          simplexRunner,
+          nativeStatus: {
+            ...loadedState.nativeStatus,
+            simplexRunner: summarizeSimplexRunnerStatus(simplexRunner),
+          },
+        });
         setStatus("ready");
       } catch (caught) {
         if (!active || !isMountedRef.current) return;
@@ -54,4 +62,11 @@ export function useFreexsterData(client: FreexsterClient) {
     }),
     [client, error, state, status],
   );
+}
+
+function summarizeSimplexRunnerStatus(status: SimplexRunnerStatus): NativeStatus["simplexRunner"] {
+  if (status.canConnect) return "connected";
+  if (status.state === "desktop-required" || status.state === "not-configured") return "not-configured";
+
+  return "error";
 }

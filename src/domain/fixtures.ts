@@ -9,6 +9,18 @@ export const demoState: FreexsterState = {
     simplexRunner: "mock-connected",
     registry: "mock",
   },
+  simplexRunner: {
+    runtime: "web",
+    host: "127.0.0.1",
+    port: 5225,
+    webSocketUrl: "ws://127.0.0.1:5225",
+    state: "desktop-required",
+    configured: false,
+    canConnect: false,
+    binaryPath: null,
+    lastError: "SimpleX runner status is available in the Freexster desktop app.",
+    securityBoundary: "SimpleX CLI WebSocket is unauthenticated; Freexster only probes 127.0.0.1.",
+  },
   inboxThreads: [
     {
       id: "thread-simplex-onboarding",

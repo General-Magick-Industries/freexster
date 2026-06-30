@@ -48,6 +48,20 @@ describe("AppShell", () => {
     expect(await screen.findByText("Channel request submitted for review.")).toBeInTheDocument();
   });
 
+  it("renders SimpleX runner settings on the settings surface", () => {
+    render(
+      <AppShell
+        state={{ ...demoState, activeSurface: "settings" }}
+        onSurfaceChange={() => undefined}
+        onSubmitChannelRequest={async () => undefined}
+      />,
+    );
+
+    expect(screen.getByRole("button", { name: "Settings" })).toHaveAttribute("aria-current", "page");
+    expect(screen.getByText("SimpleX runner")).toBeInTheDocument();
+    expect(screen.getByText("simplex-chat -p 5225")).toBeInTheDocument();
+  });
+
   it("disables repeated channel requests while pending and recovers with error feedback", async () => {
     const user = userEvent.setup();
     let rejectRequest: ((error?: unknown) => void) | undefined;
