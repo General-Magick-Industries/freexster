@@ -4,6 +4,7 @@ import type { FreexsterState, Surface } from "../domain/types";
 import { ChannelsPanel } from "./ChannelsPanel";
 import { InboxPanel } from "./InboxPanel";
 import { PlaceholderSurface } from "./PlaceholderSurface";
+import { SettingsPanel } from "./SettingsPanel";
 import { Sidebar } from "./Sidebar";
 import { ThreadPanel } from "./ThreadPanel";
 import { TrustPanel } from "./TrustPanel";
@@ -42,6 +43,8 @@ export function AppShell({
           </>
         ) : state.activeSurface === "channels" ? (
           <ChannelsPanel state={state} onSubmitChannelRequest={onSubmitChannelRequest} />
+        ) : state.activeSurface === "settings" ? (
+          <SettingsPanel simplexRunner={state.simplexRunner} />
         ) : (
           <PlaceholderSurface surface={state.activeSurface} agents={state.agents} />
         )}

@@ -247,6 +247,67 @@ button:disabled {
   color: #8a1f1f;
 }
 
+.settings-summary p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.runner-state {
+  display: inline-flex;
+  margin-bottom: 12px;
+  border-radius: 999px;
+  padding: 5px 8px;
+  background: #fff1d6;
+  color: #7a4a00;
+  font-size: 12px;
+  font-weight: 760;
+}
+
+.runner-state.ready {
+  background: var(--accent-soft);
+  color: #064e45;
+}
+
+.status-grid {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.status-grid div {
+  display: grid;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.status-grid dt {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 760;
+  text-transform: uppercase;
+}
+
+.status-grid dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.command-chip {
+  display: inline-flex;
+  max-width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 8px 10px;
+  background: #202124;
+  color: #f4f1ea;
+  overflow-wrap: anywhere;
+}
+
 .proof-state {
   display: inline-flex;
   margin-bottom: 8px;

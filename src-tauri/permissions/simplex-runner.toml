@@ -1,0 +1,4 @@
+[[permission]]
+identifier = "allow-simplex-runner-status"
+description = "Allows Freexster to inspect local-only SimpleX runner readiness."
+commands.allow = ["simplex_runner_status"]

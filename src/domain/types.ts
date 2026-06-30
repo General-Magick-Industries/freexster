@@ -62,8 +62,29 @@ export type AgentPolicy = {
 
 export type NativeStatus = {
   runtime: "web" | "tauri";
-  simplexRunner: "not-configured" | "mock-connected" | "connected" | "error";
+  simplexRunner: SimplexRunnerState | "mock-connected" | "connected";
   registry: "mock" | "local" | "ic";
+};
+
+export type SimplexRunnerState =
+  | "desktop-required"
+  | "not-configured"
+  | "missing-binary"
+  | "configured-not-running"
+  | "listening"
+  | "error";
+
+export type SimplexRunnerStatus = {
+  runtime: "web" | "tauri";
+  host: "127.0.0.1";
+  port: number;
+  webSocketUrl: string;
+  state: SimplexRunnerState;
+  configured: boolean;
+  canConnect: boolean;
+  binaryPath: string | null;
+  lastError: string | null;
+  securityBoundary: string;
 };
 
 export type FreexsterState = {
@@ -71,6 +92,7 @@ export type FreexsterState = {
   activeThreadId: string;
   activeChannelId: string;
   nativeStatus: NativeStatus;
+  simplexRunner: SimplexRunnerStatus;
   inboxThreads: InboxThread[];
   channels: TopicChannel[];
   channelRequests: ChannelRequest[];

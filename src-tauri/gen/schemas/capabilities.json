@@ -1,1 +1,1 @@
-{"default":{"identifier":"default","description":"Default permissions for the Freexster desktop shell.","local":true,"windows":["main"],"permissions":["allow-freexster-status"]}}
+{"default":{"identifier":"default","description":"Default permissions for the Freexster desktop shell.","local":true,"windows":["main"],"permissions":["allow-freexster-status","allow-simplex-runner-status"]}}
